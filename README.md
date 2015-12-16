@@ -20,5 +20,5 @@ your.remote.host
 * Execute ansible-playbook
 
 ```
-$ ansible-playbook -i hosts build.yml
+$ ansible-playbook build.yml
 ```
