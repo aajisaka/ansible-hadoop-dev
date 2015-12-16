@@ -1,0 +1,58 @@
+---
+- hosts: build
+  remote_user : root
+  tasks:
+
+  - name: Disable SELinux
+    command: setenforce 0
+
+  - name: Install RPMs
+    yum: name={{ item }} state=present
+    with_items:
+    - lzo-devel
+    - zlib-devel
+    - gcc
+    - gcc-c++
+    - autoconf
+    - automake
+    - libtool
+    - openssl-devel
+    - fuse-devel
+    - java-1.7.0-openjdk
+    - java-1.7.0-openjdk-devel
+    - git
+
+  - name: Check if ProtocolBuffers is installed
+    command: which protoc
+    register: installed_protoc
+    ignore_errors: True
+
+  - name: Download ProtocolBuffers 2.5.0
+    get_url: url=https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz dest=/root/protobuf-2.5.0.tar.gz
+    when: installed_protoc|failed
+
+  - name: Extract ProtocolBuffers
+    shell: cd /opt && tar xzvf /root/protobuf-2.5.0.tar.gz creates=/opt/protobuf-2.5.0
+    when: installed_protoc|failed
+
+  - name: Install ProtocolBuffers
+    shell: cd /opt/protobuf-2.5.0 && ./configure && make && make install
+    when: installed_protoc|failed
+
+  - name: Check if Maven is installed
+    command: which mvn
+    register: installed_mvn
+    ignore_errors: True
+
+  - name: Download Apache Maven 3.3.9
+    get_url: url=http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz dest=/root/apache-maven-3.3.9-bin.tar.gz
+    when: installed_mvn|failed
+
+  - name: Extract Maven
+    shell: cd /opt && tar xzvf /root/apache-maven-3.3.9-bin.tar.gz creates=/opt/apache-maven-3.3.9
+    when: installed_mvn|failed
+
+  - name: Add Maven to PATH
+    shell: echo "export PATH=$PATH:/opt/apache-maven-3.3.9/bin" >> /etc/bashrc
+    when: installed_mvn|failed
+

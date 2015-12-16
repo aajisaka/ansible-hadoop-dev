@@ -1,0 +1,4 @@
+# Change the remote hostname to yours.
+# By default, the remote host is configured for my convenience.
+[build]
+hadoop263.cloudapp.net
