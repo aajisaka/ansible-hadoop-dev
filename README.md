@@ -9,7 +9,16 @@ Deploy environment for Hadoop build. This ansible playbook will install required
 
 ## How to use
 
-* Edit remote hostname in hosts
+* Configure your hosts file
+
+```
+$ cat /your/path/to/hosts
+[build]
+your.remote.host
+```
+
 * Execute ansible-playbook
- 
-  $ ansible-playbook -i hosts build.yml
+
+```
+$ ansible-playbook -i hosts build.yml
+```
