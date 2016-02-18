@@ -53,6 +53,6 @@
     when: installed_mvn|failed
 
   - name: Add Maven to PATH
-    shell: echo "export PATH=$PATH:/opt/apache-maven-3.3.9/bin" >> /etc/bashrc
+    shell: echo 'export PATH=$PATH:/opt/apache-maven-3.3.9/bin' >> /etc/bashrc
     when: installed_mvn|failed
 
