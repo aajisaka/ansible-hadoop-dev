@@ -12,6 +12,7 @@
     - zlib-devel
     - gcc
     - gcc-c++
+    - cmake
     - autoconf
     - automake
     - libtool
