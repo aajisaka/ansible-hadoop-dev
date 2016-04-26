@@ -1,6 +1,5 @@
 ---
 - hosts: build
-  remote_user : root
   tasks:
 
   - name: Disable SELinux
