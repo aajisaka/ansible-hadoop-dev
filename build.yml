@@ -43,7 +43,7 @@
     selinux: state=disabled
 
   - name: Check if ProtocolBuffers is installed
-    command: which protoc
+    command: test -f /usr/local/bin/protoc
     register: installed_protoc
     ignore_errors: True
 
@@ -60,7 +60,7 @@
     when: installed_protoc|failed
 
   - name: Check if Maven is installed
-    command: which mvn
+    command: test -f /opt/apache-maven-3.3.9/bin/mvn
     register: installed_mvn
     ignore_errors: True
 
