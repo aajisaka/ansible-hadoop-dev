@@ -1,5 +1,5 @@
 # ansible-hadoop-dev
-Deploy environment for Hadoop build. This ansible playbook will install required packages for building Hadoop such as Java, RPMs, Protocol Buffers 2.5.0, and Apache Maven.
+Deploy environment for building Apache Hadoop. This ansible playbook will install required packages for building Apache Hadoop such as Java, RPMs, Protocol Buffers 2.5.0, and Apache Maven.
 
 # License
 
