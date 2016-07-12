@@ -24,7 +24,6 @@
   - name: Install RPMs
     yum: name={{ item }} state=present
     with_items:
-    - lzo-devel
     - zlib-devel
     - gcc
     - gcc-c++
