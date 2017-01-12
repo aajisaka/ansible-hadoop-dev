@@ -42,7 +42,7 @@
     set_fact: apache_mirror="{{ (response.stdout|from_json)["preferred"] }}"
 
   - name: Download Apache ZooKeeper
-    get_url: url={{ apache_mirror }}/apache/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz dest=/tmp/zookeeper-3.4.9.tar.gz
+    get_url: url={{ apache_mirror }}zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz dest=/tmp/zookeeper-3.4.9.tar.gz
 
   - name: Extract ZooKeeper
     shell: cd /opt && tar xzvf /tmp/zookeeper-3.4.9.tar.gz creates=/opt/zookeeper-3.4.9
