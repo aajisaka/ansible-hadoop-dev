@@ -27,12 +27,12 @@
     - zlib-devel
     - gcc
     - gcc-c++
-    - cmake
     - autoconf
     - automake
     - libtool
     - openssl-devel
     - fuse-devel
+    - cyrus-sasl-devel
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
     - git
@@ -40,6 +40,23 @@
 
   - name: Disable SELinux
     selinux: state=disabled
+
+  - Check if CMake is installed
+    command: test -f /opt/cmake/bin/cmake
+    register: installed_cmake
+    ignore_errors: True
+
+  - name: Download CMake
+    get_url: url=https://cmake.org/files/v3.12/cmake-3.12.2-Linux-x86_64.tar.gz dest=/root/cmake-3.12.2-Linux-x86_64.tar.gz
+    when: installed_cmake|failed
+
+  - name: Extract CMake
+    shell: cd /opt && tar xzvf /root/cmake-3.12.2-Linux-x86_64.tar.gz creates=/opt/cmake-3.12.2-Linux-x86_64
+    when: installed_cmake|failed
+
+  - name: Add CMake to PATH
+    shell: echo 'export PATH=$PATH:/opt/cmake-3.12.2-Linux-x86_64/bin' >> /etc/bashrc
+    when: installed_cmake|failed
 
   - name: Check if ProtocolBuffers is installed
     command: test -f /usr/local/bin/protoc
