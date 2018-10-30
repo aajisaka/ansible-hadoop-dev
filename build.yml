@@ -33,6 +33,7 @@
     - libtool
     - openssl-devel
     - fuse-devel
+    - snappy-devel
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
     - git
